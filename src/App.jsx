@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { ALL_COURSES } from './data/courses';
 import {
   BookOpen,
@@ -156,15 +156,7 @@ const COURSE_INDEX = {
 
 // --- HELPER FUNCTIONS ---
 
-const generateFile = (content, filename) => {
-  const element = document.createElement("a");
-  const file = new Blob([content], { type: 'text/plain' });
-  element.href = URL.createObjectURL(file);
-  element.download = filename;
-  document.body.appendChild(element);
-  element.click();
-  document.body.removeChild(element);
-};
+
 
 const speak = (text) => {
   if ('speechSynthesis' in window) {
@@ -765,7 +757,6 @@ const Dashboard = ({ user, onLogout }) => {
 
   const GrammarView = ({ data }) => {
     const [answers, setAnswers] = useState({});
-    const [showResult, setShowResult] = useState(false);
 
     const checkAnswer = (idx, opt) => {
       setAnswers(prev => ({ ...prev, [idx]: opt }));
@@ -1072,7 +1063,7 @@ const Dashboard = ({ user, onLogout }) => {
 
             {activeLesson.type === 'Vocabulary' && <VocabView data={activeLesson.words || activeLesson.content} />}
             {(activeLesson.type === 'Grammar' || activeLesson.type === 'Practice') && <GrammarView data={activeLesson.content} />}
-            {activeLesson.type === 'Practical' && <PracticalView data={activeLesson.content} />}
+            {activeLesson.type === 'Practical' && <PracticalView data={activeLesson} />}
           </>
         )}
       </div>

@@ -49,11 +49,12 @@ export const ALL_COURSES = {
     },
     A2: {
         vocabulary: [], // To be added
-        GRAMMAR_A2_L1, GRAMMAR_A2_L2, GRAMMAR_A2_L3, GRAMMAR_A2_L4,
-        GRAMMAR_A2_L5, GRAMMAR_A2_L6, GRAMMAR_A2_L7, GRAMMAR_A2_L8
+        grammar: [
+            GRAMMAR_A2_L1, GRAMMAR_A2_L2, GRAMMAR_A2_L3, GRAMMAR_A2_L4,
+            GRAMMAR_A2_L5, GRAMMAR_A2_L6, GRAMMAR_A2_L7, GRAMMAR_A2_L8
         ]
     },
-B1: { vocabulary: [], grammar: [] },
-ReviewB1: { practice: [], memory: [] },
-Practical: { scenarios: [DATA_PRACTICAL_NAIL, DATA_PRACTICAL_SUPERMARKET] }
+    B1: { vocabulary: [], grammar: [] },
+    ReviewB1: { practice: [], memory: [] },
+    Practical: { scenarios: [DATA_PRACTICAL_NAIL, DATA_PRACTICAL_SUPERMARKET] }
 };
