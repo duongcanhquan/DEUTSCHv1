@@ -34,6 +34,13 @@ import { GRAMMAR_A2_L8 } from './a2/grammar_lektion8';
 // Import Practical
 import { DATA_PRACTICAL_NAIL } from './practical/nail_beauty';
 import { DATA_PRACTICAL_SUPERMARKET } from './practical/supermarket';
+import { DATA_PRACTICAL_GASTRO } from './practical/gastronomy';
+import { DATA_PRACTICAL_FOOD } from './practical/food_processing';
+import { DATA_PRACTICAL_FASTFOOD } from './practical/fast_food';
+import { DATA_PRACTICAL_CHEF } from './practical/chef_kitchen';
+import { DATA_PRACTICAL_SPA } from './practical/spa_skincare';
+import { DATA_PRACTICAL_HANDWERK } from './practical/plumbing_electric';
+import { DATA_PRACTICAL_HAIR } from './practical/hair_stylist';
 
 export const ALL_COURSES = {
     A1: {
@@ -56,5 +63,5 @@ export const ALL_COURSES = {
     },
     B1: { vocabulary: [], grammar: [] },
     ReviewB1: { practice: [], memory: [] },
-    Practical: { scenarios: [DATA_PRACTICAL_NAIL, DATA_PRACTICAL_SUPERMARKET] }
+    Practical: { scenarios: [DATA_PRACTICAL_NAIL, DATA_PRACTICAL_SUPERMARKET, DATA_PRACTICAL_GASTRO, DATA_PRACTICAL_FOOD, DATA_PRACTICAL_FASTFOOD, DATA_PRACTICAL_CHEF, DATA_PRACTICAL_SPA, DATA_PRACTICAL_HANDWERK, DATA_PRACTICAL_HAIR] }
 };

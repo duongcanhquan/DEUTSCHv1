@@ -3,6 +3,12 @@ export const DATA_PRACTICAL_NAIL = {
     title: "Chuyên ngành Nail & Beauty (Nâng cao)",
     description: "Từ vựng kỹ thuật, xử lý sự cố và giao tiếp chuyên nghiệp trong tiệm Nail.",
     gradient: "from-pink-600 to-rose-600", // Deeper, more professional color
+    // NEW: Motivational Introduction
+    introduction: {
+        title: "Cơ hội việc làm & Tip khủng",
+        text: "Nghề Nail tại Đức đang cực kỳ khát nhân lực. Một thợ Nail giỏi không chỉ cần tay nghề cao mà còn phải biết 'buôn chuyện' (Smalltalk) để giữ khách. Bộ từ vựng này sẽ giúp bạn hiểu rõ các thuật ngữ 'Lifting', 'Refill' để tư vấn chuyên nghiệp, đồng thời dạy bạn những câu giao tiếp khéo léo để khách hàng vui vẻ 'móc ví' Tip thêm cho bạn. Đừng chỉ làm thợ, hãy là một nghệ sĩ biết giao tiếp!",
+        icon: "Sparkles"
+    },
 
     groups: [
         {

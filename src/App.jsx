@@ -22,7 +22,15 @@ import {
   Award,
   Star,
   Home,
-  Briefcase
+  Briefcase,
+  Banknote,
+  Sparkles,
+  HardHat,
+  Zap,
+  ChefHat,
+  Flower2,
+  Wrench,
+  Scissors
 } from 'lucide-react';
 
 // --- MOCK DATABASE (MODULAR FILE STRUCTURE) ---
@@ -870,6 +878,29 @@ const Dashboard = ({ user, onLogout }) => {
     if (data.groups) {
       return (
         <div className="space-y-6">
+          {/* Motivational Introduction */}
+          {data.introduction && (
+            <div className="bg-gradient-to-r from-amber-50 to-orange-50 border-l-4 border-amber-500 p-6 rounded-r-sm shadow-sm mb-8">
+              <div className="flex items-start gap-4">
+                <div className="p-3 bg-white rounded-full shadow-sm border border-amber-100">
+                  {data.introduction.icon === 'Banknote' ? <Banknote className="text-amber-600" size={32} /> :
+                    data.introduction.icon === 'Sparkles' ? <Sparkles className="text-amber-600" size={32} /> :
+                      data.introduction.icon === 'HardHat' ? <HardHat className="text-amber-600" size={32} /> :
+                        data.introduction.icon === 'Zap' ? <Zap className="text-amber-600" size={32} /> :
+                          data.introduction.icon === 'ChefHat' ? <ChefHat className="text-amber-600" size={32} /> :
+                            data.introduction.icon === 'Flower2' ? <Flower2 className="text-amber-600" size={32} /> :
+                              data.introduction.icon === 'Wrench' ? <Wrench className="text-amber-600" size={32} /> :
+                                data.introduction.icon === 'Scissors' ? <Scissors className="text-amber-600" size={32} /> :
+                                  <Star className="text-amber-600" size={32} />}
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-slate-900 mb-2">{data.introduction.title}</h3>
+                  <p className="text-slate-700 leading-relaxed text-lg">{data.introduction.text}</p>
+                </div>
+              </div>
+            </div>
+          )}
+
           {data.groups.map(group => (
             <div key={group.id} className="border-2 border-slate-200 rounded-sm bg-white overflow-hidden">
               <div
