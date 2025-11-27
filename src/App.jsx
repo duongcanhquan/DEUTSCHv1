@@ -159,13 +159,30 @@ const COURSE_INDEX = {
 
 
 const speak = (text) => {
-  if ('speechSynthesis' in window) {
-    window.speechSynthesis.cancel(); // Stop previous
+  if (!('speechSynthesis' in window)) {
+    alert("Trình duyệt của bạn không hỗ trợ đọc văn bản.");
+    return;
+  }
+
+  const play = () => {
+    window.speechSynthesis.cancel();
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = 'de-DE';
+
+    // Try to find a German voice
+    const voices = window.speechSynthesis.getVoices();
+    const germanVoice = voices.find(v => v.lang.includes('de'));
+    if (germanVoice) {
+      utterance.voice = germanVoice;
+    }
+
     window.speechSynthesis.speak(utterance);
+  };
+
+  if (window.speechSynthesis.getVoices().length === 0) {
+    window.speechSynthesis.onvoiceschanged = play;
   } else {
-    alert("Trình duyệt của bạn không hỗ trợ đọc văn bản.");
+    play();
   }
 };
 
@@ -950,46 +967,60 @@ const Dashboard = ({ user, onLogout }) => {
 
   return (
     <div className="flex min-h-screen bg-slate-50">
-      {/* Sidebar Desktop */}
-      <div className="hidden md:flex w-72 bg-white border-r-2 border-slate-200 flex-col shrink-0 z-20">
-        <div className="p-6 border-b-2 border-slate-200 cursor-pointer hover:bg-slate-50 transition-colors" onClick={goHome}>
-          <h1 className="text-3xl font-black tracking-tighter text-slate-900">DEUTSCH<span className="text-amber-500">v1</span></h1>
-          <div className="text-xs font-bold text-slate-400 mt-1 uppercase tracking-widest">Hệ Thống Học Tập</div>
-        </div>
+      {/* Sidebar Desktop & Mobile */}
+      <>
+        {/* Overlay for mobile */}
+        {mobileMenuOpen && (
+          <div
+            className="fixed inset-0 bg-black/50 z-30 md:hidden"
+            onClick={() => setMobileMenuOpen(false)}
+          />
+        )}
 
-        <div className="flex-1 overflow-y-auto py-6">
-          {Object.keys(COURSE_INDEX).map(level => (
-            <div key={level} className="mb-2">
-              <div
-                onClick={() => {
-                  setActiveLevel(level);
-                  setActiveLesson(null);
-                  setActiveMode(level === 'Thực chiến' ? 'practical' : null);
-                }}
-                className={`px-6 py-4 font-bold cursor-pointer flex justify-between items-center hover:bg-slate-50 transition-colors border-l-4 ${activeLevel === level ? 'border-amber-500 text-slate-900 bg-amber-50' : 'border-transparent text-slate-500'}`}
-              >
-                {level}
-                <ChevronRight size={16} className={`transition-transform ${activeLevel === level ? 'rotate-90' : ''}`} />
+        <div className={`
+          fixed md:static inset-y-0 left-0 w-72 bg-white border-r-2 border-slate-200 flex flex-col shrink-0 z-40 transition-transform duration-300 ease-in-out
+          ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
+        `}>
+          <div className="p-6 border-b-2 border-slate-200 cursor-pointer hover:bg-slate-50 transition-colors" onClick={() => { goHome(); setMobileMenuOpen(false); }}>
+            <h1 className="text-3xl font-black tracking-tighter text-slate-900">DEUTSCH<span className="text-amber-500">v1</span></h1>
+            <div className="text-xs font-bold text-slate-400 mt-1 uppercase tracking-widest">Hệ Thống Học Tập</div>
+          </div>
+
+          <div className="flex-1 overflow-y-auto py-6">
+            {Object.keys(COURSE_INDEX).map(level => (
+              <div key={level} className="mb-2">
+                <div
+                  onClick={() => {
+                    setActiveLevel(level);
+                    setActiveLesson(null);
+                    setActiveMode(level === 'Thực chiến' ? 'practical' : null);
+                    setMobileMenuOpen(false);
+                  }}
+                  className={`px-6 py-4 font-bold cursor-pointer flex justify-between items-center hover:bg-slate-50 transition-colors border-l-4 ${activeLevel === level ? 'border-amber-500 text-slate-900 bg-amber-50' : 'border-transparent text-slate-500'}`}
+                >
+                  {level}
+                  <ChevronRight size={16} className={`transition-transform ${activeLevel === level ? 'rotate-90' : ''}`} />
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="p-4 border-t-2 border-slate-200 bg-slate-50">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 bg-white border-2 border-slate-200 rounded-full flex items-center justify-center font-bold text-slate-600 shadow-sm">
+                {user.name.charAt(0)}
+              </div>
+              <div>
+                <div className="font-bold text-sm text-slate-900">{user.name}</div>
+                <div className="text-xs text-slate-500">Học Viên</div>
               </div>
             </div>
-          ))}
-        </div>
-
-        <div className="p-4 border-t-2 border-slate-200 bg-slate-50">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-10 h-10 bg-white border-2 border-slate-200 rounded-full flex items-center justify-center font-bold text-slate-600 shadow-sm">
-              {user.name.charAt(0)}
-            </div>
-            <div>
-              <div className="font-bold text-sm text-slate-900">{user.name}</div>
-              <div className="text-xs text-slate-500">Học Viên</div>
-            </div>
+            <Button variant="secondary" onClick={onLogout} className="w-full text-xs py-2">
+              <LogOut size={14} /> Đăng xuất
+            </Button>
           </div>
-          <Button variant="secondary" onClick={onLogout} className="w-full text-xs py-2">
-            <LogOut size={14} /> Đăng xuất
-          </Button>
         </div>
-      </div>
+      </>
 
       {/* Mobile Header */}
       <div className="md:hidden fixed top-0 left-0 right-0 bg-white border-b border-slate-200 z-50 px-4 py-3 flex justify-between items-center shadow-sm">
