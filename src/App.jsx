@@ -588,6 +588,9 @@ const LoginForm = ({ onLogin, onBack }) => {
     <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
       <div className="max-w-md w-full">
         <Button variant="ghost" onClick={onBack} className="mb-8"><RotateCcw size={16} /> Quay lại</Button>
+        <div className="flex justify-center mb-8">
+          <img src="https://raw.githubusercontent.com/duongcanhquan/image/main/logo%20vietmy.webp" alt="Logo" className="h-32 object-contain" />
+        </div>
         <Card title="ĐĂNG NHẬP HỆ THỐNG">
           <Input label="Tên đăng nhập" value={username} onChange={e => setUsername(e.target.value)} />
           <Input label="Mật khẩu" type="password" value={password} onChange={e => setPassword(e.target.value)} />
@@ -622,8 +625,8 @@ const Dashboard = ({ user, onLogout }) => {
         "Wer fremde Sprachen nicht kennt, weiß nichts von seiner eigenen." <br />
         <span className="text-sm font-bold mt-2 block">- Johann Wolfgang von Goethe</span>
       </p>
-      <div className="w-full max-w-3xl h-64 bg-slate-200 border-2 border-dashed border-slate-400 flex items-center justify-center rounded-lg">
-        <span className="text-slate-400 font-bold uppercase tracking-widest">Khu vực Banner</span>
+      <div className="w-full max-w-3xl h-64 flex items-center justify-center rounded-lg overflow-hidden mb-8">
+        <img src="https://raw.githubusercontent.com/duongcanhquan/image/main/logo%20vietmy.webp" alt="Banner" className="w-full h-full object-contain" />
       </div>
       <p className="mt-8 text-slate-600">Chọn một cấp độ từ menu bên trái để bắt đầu.</p>
     </div>
